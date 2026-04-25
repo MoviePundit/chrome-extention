@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Audio Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>Player Audio Collector</h1>
+      <p class="heroSub">Apple Black Style | Player-Only Mode</p>
+    </header>
+
+    <section class="card">
+      <h2>1) Discover Chapters</h2>
+      <p class="modeHint">Scan the active tab player, resolve chapter URLs, then keep only the chapters you want.</p>
+      <div class="actions single">
+        <button id="resolvePlaylistBtn" type="button" class="btnPrimary">Discover Chapters from Player</button>
+      </div>
+
+      <label for="playerLinksList">Discovered Chapters</label>
+      <div class="miniActions">
+        <button id="selectAllPlayerLinksBtn" type="button" class="btnSoft">Select All Chapters</button>
+        <button id="selectNonePlayerLinksBtn" type="button" class="btnSoft">Clear Selection</button>
+      </div>
+      <div id="playerLinksList" class="checklist empty">No chapters discovered yet</div>
+    </section>
+
+    <section class="card">
+      <h2>2) Download Settings</h2>
+      <div class="row">
+        <div>
+          <label for="concurrency">Parallel Downloads</label>
+          <input id="concurrency" type="number" min="1" value="2">
+        </div>
+        <div>
+          <label for="zipChunkMb">ZIP Split Size (MB)</label>
+          <input id="zipChunkMb" type="number" min="0" value="200" placeholder="0 = disabled">
+        </div>
+      </div>
+
+      <label for="zipHint">ZIP Hint</label>
+      <input id="zipHint" value="If one ZIP is too large or fails, files are split into ZIP parts." disabled>
+
+      <div class="actions">
+        <button id="startBtn" class="btnAccent">Fetch Selected Chapters</button>
+        <button id="zipBtn" class="btnPrimary" disabled>Download ZIP Archive</button>
+      </div>
+
+      <div class="actions single">
+        <button id="abortBtn" class="btnDanger" type="button" disabled>Abort Current Task</button>
+      </div>
+
+      <div class="actions single">
+        <button id="clearMemoryBtn" class="btnSoft" type="button">Clear Memory</button>
+      </div>
+
+      <div class="progressWrap" aria-live="polite">
+        <progress id="progressBar" max="100" value="0"></progress>
+        <p id="progressLabel" class="progressLabel">Idle</p>
+      </div>
+    </section>
+
+    <p id="status" class="status"></p>
+    <pre id="log" class="log">Ready.</pre>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
